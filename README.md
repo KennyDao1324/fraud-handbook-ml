@@ -2,7 +2,7 @@
 
 This is a standalone, ML-only project for the Fraud Detection Handbook's simulated card-transaction data.
 It creates prior-only customer and terminal behavior features, uses chronological train/validation/test
-periods, compares class-weighted logistic regression and random forest models, and selects by validation
+periods, compares class-weighted logistic regression, random forest, and XGBoost, and selects by validation
 PR-AUC before one held-out test evaluation.
 
 ## Dataset source
@@ -115,7 +115,7 @@ Controls:
 After training, [open the evaluation guide](evaluation/README.md) or the `outputs/` folder. Expected files:
 
 - `dataset_profile.json`: file hashes, row counts, time range, and fraud rate
-- `model_comparison.csv`: validation metrics for both models
+- `model_comparison.csv`: validation metrics for all candidate models
 - `metrics.json`: selected model and held-out test metrics
 - `test_predictions.csv`: held-out labels and fraud scores
 - `model_comparison.png`
@@ -128,6 +128,8 @@ After training, [open the evaluation guide](evaluation/README.md) or the `output
 Random forest was selected by validation PR-AUC. The held-out 50,000-row test sample produced PR-AUC
 0.2511, ROC-AUC 0.6316, precision 0.9697, and recall 0.2143. See [all evaluation files](outputs/) and the
 [evaluation guide with chart previews](evaluation/README.md).
+XGBoost was evaluated as a third candidate, but its validation PR-AUC (0.1904) did not exceed the random
+forest result (0.2508), so it was not selected.
 
 ![Handbook model comparison](outputs/model_comparison.png)
 
